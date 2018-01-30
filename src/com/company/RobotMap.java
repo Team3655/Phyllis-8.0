@@ -29,10 +29,10 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 
     public static final int
-        Drive_Left1 = 4,
-        Drive_Left2 = 2,
+        Drive_Left1 = 2,
+        Drive_Left2 = 5,
         Drive_Right1 = 1,
-        Drive_Right2 = 5;
+        Drive_Right2 = 4;
 
     public static WPI_TalonSRX driveLeft1 = new WPI_TalonSRX(Drive_Left1);
     public static WPI_TalonSRX driveLeft2 = new  WPI_TalonSRX(Drive_Left2);

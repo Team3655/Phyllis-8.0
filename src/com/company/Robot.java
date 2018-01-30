@@ -8,11 +8,16 @@
 package com.company;
 
 import com.company.subsystems.DriveTrainSubsystem;
+import com.ctre.phoenix.ParamEnum;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // If you rename or move this class, update the build.properties file in the project root
 public class Robot extends TimedRobot 
 {
+    private Timer mainTimer = null;
     public static final DriveTrainSubsystem Sub_Drive = new DriveTrainSubsystem();
     public static OI oi;
 
@@ -37,6 +43,57 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit() 
     {
+        double value = 1;
+
+        double currentAmps = RobotMap.driveLeft1.getOutputCurrent();
+        double outputV = RobotMap.driveLeft1.getMotorOutputVoltage();
+        double busV = RobotMap.driveLeft1.getBusVoltage();
+        double outputPerc = RobotMap.driveLeft1.getMotorOutputPercent();
+        int quadPos = RobotMap.driveLeft1.getSensorCollection().getQuadraturePosition();
+        int quadVel = RobotMap.driveLeft1.getSensorCollection().getQuadratureVelocity();
+        int analogPos = RobotMap.driveLeft1.getSensorCollection().getAnalogIn();
+        int analogVel = RobotMap.driveLeft1.getSensorCollection().getAnalogInVel();
+        int selectedSensorPos = RobotMap.driveLeft1.getSelectedSensorPosition(0); /* sensor selected for PID Loop 0 */
+        int selectedSensorVel = RobotMap.driveLeft1.getSelectedSensorVelocity(0); /* sensor selected for PID Loop 0 */
+        int closedLoopErr = RobotMap.driveLeft1.getClosedLoopError(0); /* sensor selected for PID Loop 0 */
+        double closedLoopAccum = RobotMap.driveLeft1.getIntegralAccumulator(0); /* sensor selected for PID Loop 0 */
+        double derivErr = RobotMap.driveLeft1.getErrorDerivative(0); /* sensor selected for PID Loop 0 */
+
+        double currentAmpsRight = RobotMap.driveRight1.getOutputCurrent();
+        double outputVRight = RobotMap.driveRight1.getMotorOutputVoltage();
+        double busVRight = RobotMap.driveRight1.getBusVoltage();
+        double outputPercRight = RobotMap.driveRight1.getMotorOutputPercent();
+        int quadPosRight = RobotMap.driveRight1.getSensorCollection().getQuadraturePosition();
+        int quadVelRight = RobotMap.driveRight1.getSensorCollection().getQuadratureVelocity();
+        int analogPosRight = RobotMap.driveRight1.getSensorCollection().getAnalogIn();
+        int analogVelRight = RobotMap.driveRight1.getSensorCollection().getAnalogInVel();
+        int selectedSensorPosRight = RobotMap.driveRight1.getSelectedSensorPosition(0); /* sensor selected for PID Loop 0 */
+        int selectedSensorVelRight = RobotMap.driveRight1.getSelectedSensorVelocity(0); /* sensor selected for PID Loop 0 */
+        int closedLoopErrRight = RobotMap.driveLeft1.getClosedLoopError(0); /* sensor selected for PID Loop 0 */
+        double closedLoopAccumRight = RobotMap.driveRight1.getIntegralAccumulator(0); /* sensor selected for PID Loop 0 */
+        double derivErrRight = RobotMap.driveRight1.getErrorDerivative(0); /* sensor selected for PID Loop 0 */
+
+
+        RobotMap.driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
+        RobotMap.driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right2);
+        RobotMap.driveLeft1.setSafetyEnabled(false);
+        RobotMap.driveLeft2.setSafetyEnabled(false);
+        RobotMap.driveRight1.setSafetyEnabled(false);
+        RobotMap.driveRight2.setSafetyEnabled(false);
+
+        RobotMap.driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        RobotMap.driveRight1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 0, 0x00, 0x00, 0x00);
+        RobotMap.driveLeft1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        RobotMap.driveLeft1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 0, 0x00, 0x00, 0x00);
+
+        RobotMap.driveLeft1.configSetParameter(ParamEnum.eClearPositionOnQuadIdx, value, 0x00, 0x00, 10);
+        RobotMap.driveLeft1.configSetParameter(ParamEnum.eClearPositionOnLimitF, value, 0x00, 0x00, 10);
+        RobotMap.driveLeft1.configSetParameter(ParamEnum.eClearPositionOnLimitR, value, 0x00, 0x00, 10);
+
+        RobotMap.driveRight1.configSetParameter(ParamEnum.eClearPositionOnQuadIdx, value, 0x00, 0x00, 10);
+        RobotMap.driveRight1.configSetParameter(ParamEnum.eClearPositionOnLimitF, value, 0x00, 0x00, 10);
+        RobotMap.driveRight1.configSetParameter(ParamEnum.eClearPositionOnLimitR, value, 0x00, 0x00, 10);
+
         oi = new OI();
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
@@ -94,8 +151,7 @@ public class Robot extends TimedRobot
      * This function is called periodically during autonomous.
      */
     @Override
-    public void autonomousPeriodic() 
-    {
+    public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     }
 
