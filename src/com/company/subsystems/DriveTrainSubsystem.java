@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrainSubsystem extends Subsystem {
     private DifferentialDrive MainDrive = new DifferentialDrive(RobotMap.driveLeft1, RobotMap.driveRight1);
 
-    public DriveTrainSubsystem(){
+    public DriveTrainSubsystem() {
 
     }
 
@@ -20,10 +20,14 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void TeleopDrive(Joystick Driver) {
-        MainDrive.arcadeDrive(Driver.getY() * .5, Driver.getX() * .5);
+        MainDrive.arcadeDrive(Driver.getY() * .8, Driver.getX() * .8);
     }
 
     public void Stop() {
         MainDrive.arcadeDrive(0, 0);
+    }
+
+    public void AutoDrive(double left, double right) {
+        MainDrive.tankDrive(left, right);
     }
 }

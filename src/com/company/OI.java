@@ -8,6 +8,8 @@
 package com.company;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,6 +44,11 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
     public static final Joystick Driver = new Joystick(0);
+
+    public static final Button button11 = new JoystickButton(Driver,11);
+    public static final Button button12 = new JoystickButton(Driver, 12);
+    public static final Button button10 = new JoystickButton(Driver,10);
+    public static final Button button9 = new JoystickButton(Driver, 9);
 
     public Joystick getJoystick() {
         return Driver;
