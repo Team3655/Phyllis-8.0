@@ -43,14 +43,15 @@ public class OI {
     // Start the command when the button is released and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-    public static final Joystick Driver = new Joystick(0);
+    public static final Joystick driver = new Joystick(0);
+    public static final Joystick coDriver = new Joystick(1);
 
-    public static final Button button11 = new JoystickButton(Driver,11);
-    public static final Button button12 = new JoystickButton(Driver, 12);
-    public static final Button button10 = new JoystickButton(Driver,10);
-    public static final Button button9 = new JoystickButton(Driver, 9);
+    public static final Button button11 = new JoystickButton(coDriver,11);
+    public static final Button button12 = new JoystickButton(coDriver, 12);
+    public static final Button button10 = new JoystickButton(coDriver,10);
+    public static final Button button9 = new JoystickButton(coDriver, 9);
 
     public Joystick getJoystick() {
-        return Driver;
+        return driver;
     }
 }
