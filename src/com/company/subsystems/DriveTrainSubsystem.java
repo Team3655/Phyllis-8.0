@@ -6,8 +6,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+
 public class DriveTrainSubsystem extends Subsystem {
     private DifferentialDrive MainDrive = new DifferentialDrive(RobotMap.driveLeft1, RobotMap.driveRight1);
+    private DifferentialDrive FlipperDrive = new DifferentialDrive(RobotMap.flipperLeft, RobotMap.flipperRight);
+    private DifferentialDrive ElevatorDrive = new DifferentialDrive(RobotMap.elevator, RobotMap.elevator);
 
     public DriveTrainSubsystem() {
 
@@ -29,5 +32,12 @@ public class DriveTrainSubsystem extends Subsystem {
 
     public void AutoDrive(double left, double right) {
         MainDrive.tankDrive(left, right);
+    }
+
+    public void FlipperDrive(double left, double right){
+        FlipperDrive.tankDrive(left, right);
+    }
+    public void ElevatorDrive(double left, double right){
+        ElevatorDrive.tankDrive(left, right);
     }
 }

@@ -7,10 +7,7 @@
 
 package com.company;
 
-import com.company.commands.FlipperIn;
-import com.company.commands.FlipperOut;
-import com.company.commands.RightFlipperIn;
-import com.company.commands.RightFlipperOut;
+import com.company.commands.*;
 import com.company.subsystems.DriveTrainSubsystem;
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -32,9 +29,8 @@ import static com.company.OI.*;
  * project.
  */
 // If you rename or move this class, update the build.properties file in the project root
-public class Robot extends TimedRobot 
+public class Robot extends TimedRobot
 {
-    public static final DriveTrainSubsystem Sub_Drive = new DriveTrainSubsystem();
     public static OI oi;
 
     private Command autonomousCommand;
@@ -45,7 +41,7 @@ public class Robot extends TimedRobot
      * used for any initialization code.
      */
     @Override
-    public void robotInit() 
+    public void robotInit()
     {
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Default program", new SwitchAuto());
@@ -112,13 +108,13 @@ public class Robot extends TimedRobot
      * the robot is disabled.
      */
     @Override
-    public void disabledInit() 
+    public void disabledInit()
     {
-        
+
     }
 
     @Override
-    public void disabledPeriodic() 
+    public void disabledPeriodic()
     {
         Scheduler.getInstance().run();
     }
@@ -135,7 +131,7 @@ public class Robot extends TimedRobot
      * to the switch structure below with additional strings & commands.
      */
     @Override
-    public void autonomousInit() 
+    public void autonomousInit()
     {
         autonomousCommand = (Command) autoChooser.getSelected();
 
@@ -147,7 +143,7 @@ public class Robot extends TimedRobot
          */
 
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) 
+        if (autonomousCommand != null)
         {
             autonomousCommand.start();
         }
@@ -162,17 +158,18 @@ public class Robot extends TimedRobot
     }
 
     @Override
-    public void teleopInit() 
+    public void teleopInit()
     {
         // This makes sure that the autonomous stops running when
 
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) 
+        if (autonomousCommand != null)
         {
             autonomousCommand.cancel();
         }
+        button8.whileHeld(new ElevatorUp());
         button9.whileHeld(new RightFlipperOut());
         button10.whileHeld(new RightFlipperIn());
         button11.whileHeld(new FlipperOut());
@@ -183,7 +180,7 @@ public class Robot extends TimedRobot
      * This function is called periodically during operator control.
      */
     @Override
-    public void teleopPeriodic() 
+    public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
     }
@@ -192,7 +189,7 @@ public class Robot extends TimedRobot
      * This function is called periodically during test mode.
      */
     @Override
-    public void testPeriodic() 
+    public void testPeriodic()
     {
 
     }

@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ArcadeDriveCommand extends Command {
     public ArcadeDriveCommand() {
 
-        super.requires(Robot.Sub_Drive);
         super.requires(RobotMap.MainDrive);
     }
 
