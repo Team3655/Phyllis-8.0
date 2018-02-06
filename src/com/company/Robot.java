@@ -48,43 +48,24 @@ public class Robot extends TimedRobot
         autoChooser.addObject("Switch Auto", new SwitchAuto());
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
 
+        button7.whileHeld(new ElevatorUp());
+        button8.whileHeld(new ElevatorDown());
+        button9.whileHeld(new RightFlipperOut());
+        button10.whileHeld(new RightFlipperIn());
+        button11.whileHeld(new FlipperOut());
+        button12.whileHeld(new FlipperIn());
+
         double value = 1;
 
-        double currentAmps = RobotMap.driveLeft1.getOutputCurrent();
-        double outputV = RobotMap.driveLeft1.getMotorOutputVoltage();
-        double busV = RobotMap.driveLeft1.getBusVoltage();
-        double outputPerc = RobotMap.driveLeft1.getMotorOutputPercent();
-        int quadPos = RobotMap.driveLeft1.getSensorCollection().getQuadraturePosition();
-        int quadVel = RobotMap.driveLeft1.getSensorCollection().getQuadratureVelocity();
-        int analogPos = RobotMap.driveLeft1.getSensorCollection().getAnalogIn();
-        int analogVel = RobotMap.driveLeft1.getSensorCollection().getAnalogInVel();
-        int selectedSensorPos = RobotMap.driveLeft1.getSelectedSensorPosition(0); /* sensor selected for PID Loop 0 */
-        int selectedSensorVel = RobotMap.driveLeft1.getSelectedSensorVelocity(0); /* sensor selected for PID Loop 0 */
-        int closedLoopErr = RobotMap.driveLeft1.getClosedLoopError(0); /* sensor selected for PID Loop 0 */
-        double closedLoopAccum = RobotMap.driveLeft1.getIntegralAccumulator(0); /* sensor selected for PID Loop 0 */
-        double derivErr = RobotMap.driveLeft1.getErrorDerivative(0); /* sensor selected for PID Loop 0 */
-
-        double currentAmpsRight = RobotMap.driveRight1.getOutputCurrent();
-        double outputVRight = RobotMap.driveRight1.getMotorOutputVoltage();
-        double busVRight = RobotMap.driveRight1.getBusVoltage();
-        double outputPercRight = RobotMap.driveRight1.getMotorOutputPercent();
-        int quadPosRight = RobotMap.driveRight1.getSensorCollection().getQuadraturePosition();
-        int quadVelRight = RobotMap.driveRight1.getSensorCollection().getQuadratureVelocity();
-        int analogPosRight = RobotMap.driveRight1.getSensorCollection().getAnalogIn();
-        int analogVelRight = RobotMap.driveRight1.getSensorCollection().getAnalogInVel();
-        int selectedSensorPosRight = RobotMap.driveRight1.getSelectedSensorPosition(0); /* sensor selected for PID Loop 0 */
-        int selectedSensorVelRight = RobotMap.driveRight1.getSelectedSensorVelocity(0); /* sensor selected for PID Loop 0 */
-        int closedLoopErrRight = RobotMap.driveLeft1.getClosedLoopError(0); /* sensor selected for PID Loop 0 */
-        double closedLoopAccumRight = RobotMap.driveRight1.getIntegralAccumulator(0); /* sensor selected for PID Loop 0 */
-        double derivErrRight = RobotMap.driveRight1.getErrorDerivative(0); /* sensor selected for PID Loop 0 */
-
-
+        RobotMap.driveLeft2.setInverted(true);
         RobotMap.driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
         RobotMap.driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right1);
         RobotMap.driveLeft1.setSafetyEnabled(false);
         RobotMap.driveLeft2.setSafetyEnabled(false);
         RobotMap.driveRight1.setSafetyEnabled(false);
         RobotMap.driveRight2.setSafetyEnabled(false);
+        RobotMap.flipperLeft.setSafetyEnabled(false);
+        RobotMap.flipperRight.setSafetyEnabled(false);
 
         RobotMap.driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         RobotMap.driveRight1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 0, 0x00, 0x00, 0x00);
@@ -165,15 +146,11 @@ public class Robot extends TimedRobot
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null)
+       if (autonomousCommand != null)
         {
             autonomousCommand.cancel();
         }
-        button8.whileHeld(new ElevatorUp());
-        button9.whileHeld(new RightFlipperOut());
-        button10.whileHeld(new RightFlipperIn());
-        button11.whileHeld(new FlipperOut());
-        button12.whileHeld(new FlipperIn());
+
     }
 
     /**

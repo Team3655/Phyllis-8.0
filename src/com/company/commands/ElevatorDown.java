@@ -3,11 +3,11 @@ package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import static com.company.RobotMap.FlipperDrive;
+import static com.company.RobotMap.ElevatorDrive;
 
-public class FlipperIn extends Command {
-    public FlipperIn() {
-        super("FlipperIn");
+public class ElevatorDown extends Command {
+    public ElevatorDown() {
+        super("Elevator Down");
     }
 
 
@@ -18,7 +18,7 @@ public class FlipperIn extends Command {
 
     protected void execute() {
 
-        FlipperDrive.FlipperDrive(-0.9, 0);
+        ElevatorDrive.ElevatorDrive(0.35, 0.35);
     }
     protected boolean isFinished () {
         return (true);

@@ -23,7 +23,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void TeleopDrive(Joystick Driver) {
-        MainDrive.arcadeDrive(Driver.getY() * .8, Driver.getX() * .8);
+        MainDrive.arcadeDrive(Driver.getX() * -.8, Driver.getY() * .8);
     }
 
     public void Stop() {

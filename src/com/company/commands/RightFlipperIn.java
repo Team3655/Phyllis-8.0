@@ -17,7 +17,7 @@ public class RightFlipperIn extends Command {
 
     protected void execute() {
 
-        FlipperDrive.AutoDrive(-0, -0.5);
+        FlipperDrive.FlipperDrive(-0.0, -0.9);
     }
     protected boolean isFinished () {
         return (true);
