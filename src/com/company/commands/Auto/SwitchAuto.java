@@ -17,19 +17,12 @@ public class SwitchAuto extends Command {
     @Override
     protected void initialize() {
         super.initialize();
-        driveLeft1.setSafetyEnabled(false);
-        driveRight1.setSafetyEnabled(false);
-        driveLeft2.setSafetyEnabled(false);
-        driveRight2.setSafetyEnabled(false);
+
     }
 
     protected void execute() {
-       // mainTimer.start();
-       // if (mainTimer.get() < 3.0) {
-            MainDrive.AutoDrive(0.5, 0.5);
-       // } else {
-        //    MainDrive.AutoDrive(0.0, 0.0);
-       // }
+
+        MainDrive.AutoDrive(0.5, 0.5);
     }
         protected boolean isFinished () {
             return(true);

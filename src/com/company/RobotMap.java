@@ -46,16 +46,5 @@ public class RobotMap {
     public static DriveTrainSubsystem MainDrive = new DriveTrainSubsystem();
     public static DriveTrainSubsystem FlipperDrive = new DriveTrainSubsystem();
     public static DriveTrainSubsystem ElevatorDrive = new DriveTrainSubsystem();
-
-
-
-    //driveLeft1
-
-    //driveLeft2
-
-    //driveRight1
-
-    //driveRight2
-
-    //Motor Safety
+    public static DriveTrainSubsystem AutoDrive = new DriveTrainSubsystem();
 }

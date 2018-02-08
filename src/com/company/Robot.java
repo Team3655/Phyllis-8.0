@@ -8,7 +8,8 @@
 package com.company;
 
 import com.company.commands.*;
-import com.company.subsystems.DriveTrainSubsystem;
+import com.company.commands.Auto.AutonomousCommand;
+import com.company.commands.Auto.Test;
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -44,8 +45,9 @@ public class Robot extends TimedRobot
     public void robotInit()
     {
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Default program", new SwitchAuto());
+        autoChooser.addDefault("Default auto", new Test());
         autoChooser.addObject("Switch Auto", new SwitchAuto());
+        autoChooser.addObject("AutoCommand", new AutonomousCommand());
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
 
         button7.whileHeld(new ElevatorUp());
@@ -159,6 +161,7 @@ public class Robot extends TimedRobot
     @Override
     public void teleopPeriodic()
     {
+
         Scheduler.getInstance().run();
     }
 

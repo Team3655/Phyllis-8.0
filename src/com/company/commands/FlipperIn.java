@@ -17,7 +17,6 @@ public class FlipperIn extends Command {
     }
 
     protected void execute() {
-
         FlipperDrive.FlipperDrive(-0.9, 0);
     }
     protected boolean isFinished () {

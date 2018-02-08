@@ -10,6 +10,7 @@ public class ArcadeDriveCommand extends Command {
         super.requires(RobotMap.MainDrive);
         super.requires(RobotMap.FlipperDrive);
         super.requires(RobotMap.ElevatorDrive);
+        super.requires(RobotMap.AutoDrive);
     }
 
     @Override

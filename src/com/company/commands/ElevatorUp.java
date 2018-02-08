@@ -18,7 +18,7 @@ public class ElevatorUp extends Command {
 
     protected void execute() {
 
-        ElevatorDrive.ElevatorDrive(-0.95, -.95);
+        ElevatorDrive.ElevatorDrive(-0.875, -.875);
     }
     protected boolean isFinished () {
         return (true);
