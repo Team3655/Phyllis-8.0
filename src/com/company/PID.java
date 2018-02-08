@@ -1,61 +1,35 @@
 package com.company;
 
-public class PID
-{
-    private double _p_gain, _i_gain, _d_gain, _i_accum;
-    private long _last_loop;
-    private double _error, _last_error, _set_point;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-    PID()
-    {
-        _last_loop = System.currentTimeMillis();
+
+public class PID extends PIDSubsystem {
+    public PID() {
+        // Initialize your subsystem here
+        super(0, 0, 0 /* TODO: decide which super constructor to use/call and set the appropriate values */);
+
+        // Use these to get going:
+        // setSetpoint() -  Sets where the PID controller should move the system to
+        // enable() - Enables the PID controller.
     }
 
-    PID(double p, double i, double d)
-    {
-        _p_gain = p;
-        _i_gain = i;
-        _d_gain = d;
-        _last_loop = System.currentTimeMillis();
+
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        // setDefaultCommand(new MySpecialCommand());
     }
 
-    public void setPID(double p, double i, double d)
-    {
-        _p_gain = p;
-        _i_gain = i;
-        _d_gain = d;
+
+    protected double returnPIDInput() {
+        // Return your input value for the PID loop
+        // e.g. a sensor, like a potentiometer:
+        // yourPot.getAverageVoltage() / kYourMaxVoltage;
+        return 0.0;
     }
 
-    public void ClearIAccum()
-    {
-        _i_accum = 0.0;
-    }
 
-    public void ClearError()
-    {
-        _last_error = 0.0;
-    }
-
-    public void set(double set_point)
-    {
-        _set_point = set_point;
-    }
-
-    public double update(double position)
-    {
-        long time = System.currentTimeMillis();
-        _last_error = _error;
-
-        _error = _set_point - position;
-        _i_accum += _error * (time - _last_loop) / 1000.0;
-
-        _last_loop = time;
-
-        return get();
-    }
-
-    public double get()
-    {
-        return (_error * _p_gain) + (_i_accum * _i_gain) + ((_error - _last_error) * _d_gain);
+    protected void usePIDOutput(double output) {
+        // Use output to drive your system, like a motor
+        // e.g. yourMotor.set(output);
     }
 }

@@ -10,17 +10,22 @@ package com.company;
 import com.company.commands.*;
 import com.company.commands.Auto.AutonomousCommand;
 import com.company.commands.Auto.Test;
-import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.company.commands.Auto.SwitchAuto;
+import edu.wpi.first.wpilibj.MotorSafetyHelper;
+import com.company.Instrum;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static com.company.OI.*;
+import static com.company.RobotMap.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,6 +42,7 @@ public class Robot extends TimedRobot
     private Command autonomousCommand;
     SendableChooser autoChooser;
 
+    StringBuilder sb = new StringBuilder();
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -66,21 +72,12 @@ public class Robot extends TimedRobot
         RobotMap.driveLeft2.setSafetyEnabled(false);
         RobotMap.driveRight1.setSafetyEnabled(false);
         RobotMap.driveRight2.setSafetyEnabled(false);
-        RobotMap.flipperLeft.setSafetyEnabled(false);
-        RobotMap.flipperRight.setSafetyEnabled(false);
+       // RobotMap.flipperLeft.setSafetyEnabled(false);
+       // RobotMap.flipperRight.setSafetyEnabled(false);
 
         RobotMap.driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        RobotMap.driveRight1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 0, 0x00, 0x00, 0x00);
         RobotMap.driveLeft1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        RobotMap.driveLeft1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 0, 0x00, 0x00, 0x00);
 
-        RobotMap.driveLeft1.configSetParameter(ParamEnum.eClearPositionOnQuadIdx, value, 0x00, 0x00, 10);
-        RobotMap.driveLeft1.configSetParameter(ParamEnum.eClearPositionOnLimitF, value, 0x00, 0x00, 10);
-        RobotMap.driveLeft1.configSetParameter(ParamEnum.eClearPositionOnLimitR, value, 0x00, 0x00, 10);
-
-        RobotMap.driveRight1.configSetParameter(ParamEnum.eClearPositionOnQuadIdx, value, 0x00, 0x00, 10);
-        RobotMap.driveRight1.configSetParameter(ParamEnum.eClearPositionOnLimitF, value, 0x00, 0x00, 10);
-        RobotMap.driveRight1.configSetParameter(ParamEnum.eClearPositionOnLimitR, value, 0x00, 0x00, 10);
 
         oi = new OI();
     }
@@ -161,7 +158,9 @@ public class Robot extends TimedRobot
     @Override
     public void teleopPeriodic()
     {
-
+        sb.append("\terr:");
+        sb.append(RobotMap.driveRight1.getClosedLoopError(Constants.kPIDLoopIdx));
+        sb.append("\ttrg:");
         Scheduler.getInstance().run();
     }
 
