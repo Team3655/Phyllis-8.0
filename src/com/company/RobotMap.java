@@ -7,6 +7,7 @@
 package com.company;
 import com.company.subsystems.DriveTrainSubsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -29,18 +30,21 @@ public class RobotMap {
         Drive_Left1 = 0,
         Drive_Left2 = 1,
         Drive_Right1 = 2,
-        Drive_Right2 = 14;
-       // Flipper_Right = 13,
-       // Flipper_Left = 11,
-        //Elevator = 5;
+        Drive_Right2 = 14,
+        Flipper_Right = 13,
+        Flipper_Left = 11,
+        Elevator = 5;
+
+    public static Solenoid solenoid1 = new Solenoid(0);
+    public static Solenoid solenoid2 = new Solenoid(1);
 
     public static WPI_TalonSRX driveLeft1 = new WPI_TalonSRX(Drive_Left1);
     public static WPI_TalonSRX driveLeft2 = new  WPI_TalonSRX(Drive_Left2);
     public static WPI_TalonSRX driveRight1 = new WPI_TalonSRX(Drive_Right1);
     public static WPI_TalonSRX driveRight2 = new WPI_TalonSRX(Drive_Right2);
-    //public static WPI_TalonSRX flipperRight = new WPI_TalonSRX(Flipper_Right);
-   // public static WPI_TalonSRX flipperLeft = new WPI_TalonSRX(Flipper_Left);
-   // public static WPI_TalonSRX elevator = new WPI_TalonSRX(Elevator);
+    public static WPI_TalonSRX flipperRight = new WPI_TalonSRX(Flipper_Right);
+    public static WPI_TalonSRX flipperLeft = new WPI_TalonSRX(Flipper_Left);
+    public static WPI_TalonSRX elevator = new WPI_TalonSRX(Elevator);
 
 
     public static DriveTrainSubsystem MainDrive = new DriveTrainSubsystem();

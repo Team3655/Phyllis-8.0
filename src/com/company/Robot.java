@@ -62,6 +62,7 @@ public class Robot extends TimedRobot
         button10.whileHeld(new RightFlipperIn());
         button11.whileHeld(new FlipperOut());
         button12.whileHeld(new FlipperIn());
+        button1.toggleWhenPressed(new NotOldMatics());
 
         double value = 1;
 
@@ -72,8 +73,8 @@ public class Robot extends TimedRobot
         RobotMap.driveLeft2.setSafetyEnabled(false);
         RobotMap.driveRight1.setSafetyEnabled(false);
         RobotMap.driveRight2.setSafetyEnabled(false);
-       // RobotMap.flipperLeft.setSafetyEnabled(false);
-       // RobotMap.flipperRight.setSafetyEnabled(false);
+        RobotMap.flipperLeft.setSafetyEnabled(false);
+        RobotMap.flipperRight.setSafetyEnabled(false);
 
         RobotMap.driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         RobotMap.driveLeft1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);

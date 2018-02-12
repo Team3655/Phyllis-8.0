@@ -23,14 +23,8 @@ public class SwitchAuto extends Command {
     }
 
     protected void execute() {
-        driveRight1.configMotionCruiseVelocity(1000, 10);
-        driveLeft1.configMotionCruiseVelocity(1000, 10);
-        if (driveLeft1.getSelectedSensorPosition(0) < 1000){
-            MainDrive.AutoDrive(0.0, 0.0);
-        }
-        else {
-            MainDrive.AutoDrive(0.5, 0.5);
-        }
+        //driveRight1.set();
+        //driveLeft1.set();
     }
         protected boolean isFinished () {
         return (false);
