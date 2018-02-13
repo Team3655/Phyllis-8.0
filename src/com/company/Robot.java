@@ -15,17 +15,10 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.company.commands.Auto.SwitchAuto;
-import edu.wpi.first.wpilibj.MotorSafetyHelper;
-import com.company.Instrum;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import static com.company.OI.*;
-import static com.company.RobotMap.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,6 +30,8 @@ import static com.company.RobotMap.*;
 // If you rename or move this class, update the build.properties file in the project root
 public class Robot extends TimedRobot
 {
+    public static int i = 0;
+
     public static OI oi;
 
     private Command autonomousCommand;

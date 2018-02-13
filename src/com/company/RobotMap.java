@@ -37,6 +37,8 @@ public class RobotMap {
 
     public static Solenoid solenoid1 = new Solenoid(0);
     public static Solenoid solenoid2 = new Solenoid(1);
+    public static Solenoid solenoid3 = new Solenoid(2);
+    public static Solenoid solenoid4 = new Solenoid(3);
 
     public static WPI_TalonSRX driveLeft1 = new WPI_TalonSRX(Drive_Left1);
     public static WPI_TalonSRX driveLeft2 = new  WPI_TalonSRX(Drive_Left2);
