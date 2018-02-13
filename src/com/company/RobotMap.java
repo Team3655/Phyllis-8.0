@@ -7,6 +7,7 @@
 package com.company;
 import com.company.subsystems.DriveTrainSubsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -39,6 +40,8 @@ public class RobotMap {
     public static Solenoid solenoid2 = new Solenoid(1);
     public static Solenoid solenoid3 = new Solenoid(2);
     public static Solenoid solenoid4 = new Solenoid(3);
+
+    public static Compressor compressor = new Compressor(7);
 
     public static WPI_TalonSRX driveLeft1 = new WPI_TalonSRX(Drive_Left1);
     public static WPI_TalonSRX driveLeft2 = new  WPI_TalonSRX(Drive_Left2);

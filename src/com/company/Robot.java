@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.company.commands.Auto.SwitchAuto;
 import static com.company.OI.*;
+import static com.company.RobotMap.compressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -51,13 +52,16 @@ public class Robot extends TimedRobot
         autoChooser.addObject("AutoCommand", new AutonomousCommand());
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
 
+        compressor.stop();
+
+        button1.toggleWhenPressed(new NotOldMaticsGroup());
+        button2.toggleWhenPressed(new Compressor());
         button7.whileHeld(new ElevatorUp());
         button8.whileHeld(new ElevatorDown());
         button9.whileHeld(new RightFlipperOut());
         button10.whileHeld(new RightFlipperIn());
         button11.whileHeld(new FlipperOut());
         button12.whileHeld(new FlipperIn());
-        button1.toggleWhenPressed(new NotOldMatics());
 
         double value = 1;
 
