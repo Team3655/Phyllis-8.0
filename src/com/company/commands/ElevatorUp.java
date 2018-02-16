@@ -3,6 +3,7 @@ package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import static com.company.OI.coDriver;
 import static com.company.RobotMap.ElevatorDrive;
 
 public class ElevatorUp extends Command {
@@ -18,7 +19,7 @@ public class ElevatorUp extends Command {
 
     protected void execute() {
 
-        ElevatorDrive.ElevatorDrive(-0.875, -.875);
+        //elevator.set(coDriver.getX() * -.875);
     }
     protected boolean isFinished () {
         return (true);

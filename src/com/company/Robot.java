@@ -10,6 +10,7 @@ package com.company;
 import com.company.commands.*;
 import com.company.commands.Auto.AutonomousCommand;
 import com.company.commands.Auto.Test;
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.company.commands.Auto.SwitchAuto;
 import static com.company.OI.*;
-import static com.company.RobotMap.compressor;
+import static com.company.RobotMap.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -54,8 +55,23 @@ public class Robot extends TimedRobot
 
         compressor.stop();
 
-        button1.toggleWhenPressed(new NotOldMaticsGroup());
-        button2.toggleWhenPressed(new Compressor());
+        driveRight1.configMotionCruiseVelocity(10, 10);
+        driveRight1.configMotionAcceleration(10, 10);
+        driveRight1.config_kP(0,.5,0);
+        driveRight1.config_kI(0,0,0);
+        driveRight1.config_kD(0, 0, 0);
+        driveRight1.config_kF(0,0,0);
+
+
+        driveLeft1.configMotionCruiseVelocity(10,10);
+        driveLeft1.configMotionAcceleration(10,10);
+        driveLeft1.config_kP(0,.5,0);
+        driveLeft1.config_kI(0,0,0);
+        driveLeft1.config_kD(0, 0, 0);
+        driveLeft1.config_kF(0,0,0);
+
+
+        button1.toggleWhenPressed(new NotOldMatics());
         button7.whileHeld(new ElevatorUp());
         button8.whileHeld(new ElevatorDown());
         button9.whileHeld(new RightFlipperOut());
@@ -65,18 +81,21 @@ public class Robot extends TimedRobot
 
         double value = 1;
 
-        RobotMap.driveLeft2.setInverted(true);
-        RobotMap.driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
-        RobotMap.driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right1);
-        RobotMap.driveLeft1.setSafetyEnabled(false);
-        RobotMap.driveLeft2.setSafetyEnabled(false);
-        RobotMap.driveRight1.setSafetyEnabled(false);
-        RobotMap.driveRight2.setSafetyEnabled(false);
-        RobotMap.flipperLeft.setSafetyEnabled(false);
-        RobotMap.flipperRight.setSafetyEnabled(false);
+        driveLeft1.setInverted(true);
+        driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
+        driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right1);
+        driveLeft1.setSafetyEnabled(false);
+        driveLeft2.setSafetyEnabled(false);
+        driveRight1.setSafetyEnabled(false);
+        driveRight2.setSafetyEnabled(false);
+       // RobotMap.flipperLeft.setSafetyEnabled(false);
+       // RobotMap.flipperRight.setSafetyEnabled(false);
 
-        RobotMap.driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        RobotMap.driveLeft1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        driveRight1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 1, 0x00, 0x00, 0);
+
+        driveLeft1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        driveLeft1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 0, 0x00, 0x00, 0);
 
 
         oi = new OI();
@@ -159,7 +178,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic()
     {
         sb.append("\terr:");
-        sb.append(RobotMap.driveRight1.getClosedLoopError(Constants.kPIDLoopIdx));
+        sb.append(driveRight1.getClosedLoopError(Constants.kPIDLoopIdx));
         sb.append("\ttrg:");
         Scheduler.getInstance().run();
     }

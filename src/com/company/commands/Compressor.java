@@ -28,7 +28,7 @@ public class Compressor extends Command {
      */
     @Override
     protected void execute() {
-    compressor.start();
+    compressor.stop();
     }
 
 

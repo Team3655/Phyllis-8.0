@@ -2,8 +2,8 @@ package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import static com.company.RobotMap.solenoid3;
-import static com.company.RobotMap.solenoid4;
+//import static com.company.RobotMap.solenoid3;
+//import static com.company.RobotMap.solenoid4;
 
 
 public class MaybeOldMatics extends Command {
@@ -29,8 +29,8 @@ public class MaybeOldMatics extends Command {
      */
     @Override
     protected void execute() {
-        solenoid3.set(true);
-        solenoid4.set(true);
+        //solenoid3.set(true);
+        //solenoid4.set(true);
     }
 
 

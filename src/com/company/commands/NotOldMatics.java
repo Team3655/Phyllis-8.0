@@ -66,7 +66,8 @@ public class NotOldMatics extends Command {
      */
     @Override
     protected void end() {
-
+solenoid1.set(false);
+solenoid2.set(false);
     }
 
 

@@ -11,8 +11,8 @@ import static com.company.RobotMap.FlipperDrive;
 
 public class DriveTrainSubsystem extends Subsystem {
     private DifferentialDrive MainDrive = new DifferentialDrive(RobotMap.driveLeft1, RobotMap.driveRight1);
-    private DifferentialDrive FlipperDrive = new DifferentialDrive(RobotMap.flipperLeft, RobotMap.flipperRight);
-    private DifferentialDrive ElevatorDrive = new DifferentialDrive(RobotMap.elevator, RobotMap.elevator);
+   // private DifferentialDrive FlipperDrive = new DifferentialDrive(RobotMap.flipperLeft, RobotMap.flipperRight);
+   // private DifferentialDrive ElevatorDrive = new DifferentialDrive(RobotMap.elevator, RobotMap.elevator);
 
     public DriveTrainSubsystem() {
 
@@ -25,7 +25,7 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void TeleopDrive(Joystick Driver) {
-        MainDrive.arcadeDrive(Driver.getX() * -.8, Driver.getY() * .8);
+        MainDrive.arcadeDrive(Driver.getY() * -.8, Driver.getX() * .8);
     }
 
     public void Stop() {
@@ -37,9 +37,9 @@ public class DriveTrainSubsystem extends Subsystem {
     }
 
     public void FlipperDrive(double left, double right){
-       FlipperDrive.tankDrive(left, right);
+       //FlipperDrive.tankDrive(left, right);
     }
    public void ElevatorDrive(double left, double right){
-        ElevatorDrive.tankDrive(left, right);
+        //ElevatorDrive.tankDrive(left, right);
     }
 }
