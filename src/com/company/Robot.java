@@ -32,6 +32,7 @@ import static com.company.RobotMap.*;
 // If you rename or move this class, update the build.properties file in the project root
 public class Robot extends TimedRobot
 {
+    public static int p = 0;
     public static int i = 0;
 
     public static OI oi;
@@ -47,13 +48,13 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
+        compressor1.setClosedLoopControl(true);
+        compressor1.stop();
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Default auto", new Test());
         autoChooser.addObject("Switch Auto", new SwitchAuto());
         autoChooser.addObject("AutoCommand", new AutonomousCommand());
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
-
-        compressor.stop();
 
         driveRight1.configMotionCruiseVelocity(10, 10);
         driveRight1.configMotionAcceleration(10, 10);
@@ -70,16 +71,34 @@ public class Robot extends TimedRobot
         driveLeft1.config_kD(0, 0, 0);
         driveLeft1.config_kF(0,0,0);
 
-
-        button1.toggleWhenPressed(new NotOldMatics());
-        button7.whileHeld(new ElevatorUp());
-        button8.whileHeld(new ElevatorDown());
-        button9.whileHeld(new RightFlipperOut());
-        button10.whileHeld(new RightFlipperIn());
-        button11.whileHeld(new FlipperOut());
-        button12.whileHeld(new FlipperIn());
+        button1.whileHeld(new RightFlipperOut());
+        button2.whileHeld(new RightFlipperIn());
+        button3.whileHeld(new FlipperOut());
+        button4.whileHeld(new FlipperIn());
+        button5.whileHeld(new RightFlipperOut());
+        button6.whileHeld(new RightFlipperIn());
+        button7.toggleWhenPressed(new NotOldMatics());
+        button8.toggleWhenPressed(new CubeDiddler());
+        button9.toggleWhenPressed(new IntakeIn());
+        button10.toggleWhenPressed(new IntakeOut());
+        button12.whileHeld(new ElevatorUp());
+        button13.whileHeld(new ElevatorDown());
+        button14.whileHeld(new DiddlerDown());
+        button15.whileHeld(new DiddlerUp());
 
         double value = 1;
+
+        RobotMap.driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
+        RobotMap.driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right1);
+        RobotMap.driveLeft1.setInverted(true);
+        RobotMap.driveLeft2.setInverted(true);
+        RobotMap.driveLeft1.setSafetyEnabled(false);
+        RobotMap.driveLeft2.setSafetyEnabled(false);
+        RobotMap.driveRight1.setSafetyEnabled(false);
+        RobotMap.driveRight2.setSafetyEnabled(false);
+        RobotMap.flipperLeft.setSafetyEnabled(false);
+        RobotMap.flipperRight.setSafetyEnabled(false);
+        RobotMap.elevator.setSafetyEnabled(false);
 
         driveLeft1.setInverted(true);
         driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
@@ -88,8 +107,8 @@ public class Robot extends TimedRobot
         driveLeft2.setSafetyEnabled(false);
         driveRight1.setSafetyEnabled(false);
         driveRight2.setSafetyEnabled(false);
-       // RobotMap.flipperLeft.setSafetyEnabled(false);
-       // RobotMap.flipperRight.setSafetyEnabled(false);
+        flipperLeft.setSafetyEnabled(false);
+        flipperRight.setSafetyEnabled(false);
 
         driveRight1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         driveRight1.configSetParameter(ParamEnum.eFeedbackNotContinuous, 1, 0x00, 0x00, 0);
@@ -164,7 +183,7 @@ public class Robot extends TimedRobot
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-       if (autonomousCommand != null)
+        if (autonomousCommand != null)
         {
             autonomousCommand.cancel();
         }
@@ -177,9 +196,6 @@ public class Robot extends TimedRobot
     @Override
     public void teleopPeriodic()
     {
-        sb.append("\terr:");
-        sb.append(driveRight1.getClosedLoopError(Constants.kPIDLoopIdx));
-        sb.append("\ttrg:");
         Scheduler.getInstance().run();
     }
 

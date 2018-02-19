@@ -1,13 +1,12 @@
 package com.company.commands;
 
-import static com.company.Robot.p;
-import static com.company.RobotMap.*;
-
 import edu.wpi.first.wpilibj.command.Command;
 
+import static com.company.RobotMap.*;
 
-public class NotOldMatics extends Command {
-    public NotOldMatics() {
+
+public class CubeDiddler extends Command {
+    public CubeDiddler() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -29,15 +28,8 @@ public class NotOldMatics extends Command {
      */
     @Override
     protected void execute() {
-        if(p % 2 != 0) {
-            solenoid3.set(true);
-            solenoid4.set(true);
-        } else {
-            solenoid3.set(false);
-            solenoid4.set(false);
-            solenoid5.set(true);
-            solenoid6.set(true);
-        }
+        solenoid1.set(true);
+        solenoid2.set(true);
     }
 
 
@@ -73,8 +65,9 @@ public class NotOldMatics extends Command {
      */
     @Override
     protected void end() {
-solenoid1.set(false);
-solenoid2.set(false);
+        solenoid1.set(false);
+        solenoid2.set(false);
+
     }
 
 

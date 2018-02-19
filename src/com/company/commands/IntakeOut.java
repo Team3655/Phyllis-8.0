@@ -1,13 +1,12 @@
 package com.company.commands;
 
-import static com.company.Robot.p;
-import static com.company.RobotMap.*;
-
 import edu.wpi.first.wpilibj.command.Command;
+import static com.company.RobotMap.intakeRight;
+import static com.company.RobotMap.intakeLeft;
 
 
-public class NotOldMatics extends Command {
-    public NotOldMatics() {
+public class IntakeOut extends Command {
+    public IntakeOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -29,15 +28,10 @@ public class NotOldMatics extends Command {
      */
     @Override
     protected void execute() {
-        if(p % 2 != 0) {
-            solenoid3.set(true);
-            solenoid4.set(true);
-        } else {
-            solenoid3.set(false);
-            solenoid4.set(false);
-            solenoid5.set(true);
-            solenoid6.set(true);
-        }
+
+        intakeRight.set(0.75);
+        intakeLeft.set(-0.75);
+
     }
 
 
@@ -73,8 +67,8 @@ public class NotOldMatics extends Command {
      */
     @Override
     protected void end() {
-solenoid1.set(false);
-solenoid2.set(false);
+        intakeRight.set(0);
+        intakeLeft.set(0);
     }
 
 

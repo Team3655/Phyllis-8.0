@@ -18,7 +18,11 @@ public class SwitchAuto extends Command {
     protected void initialize() {
         driveRight1.setSelectedSensorPosition(0, 0, 0);
         driveLeft1.setSelectedSensorPosition(0, 0, 0);
+<<<<<<< HEAD
+        driveRight1.setSensorPhase(true);
+=======
         driveRight1.setSensorPhase(-1l, true);
+>>>>>>> 6343854b2fbb62490fbd3a4f60862b2c9b6be08a
         driveRight1.set(ControlMode.MotionMagic, 0);
         driveLeft1.set(ControlMode.MotionMagic, 0);
         super.initialize();

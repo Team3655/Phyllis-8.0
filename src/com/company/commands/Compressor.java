@@ -2,7 +2,7 @@ package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import static com.company.RobotMap.compressor;
+import static com.company.RobotMap.compressor1;
 
 
 public class Compressor extends Command {
@@ -28,7 +28,7 @@ public class Compressor extends Command {
      */
     @Override
     protected void execute() {
-    compressor.stop();
+    compressor1.stop();
     }
 
 

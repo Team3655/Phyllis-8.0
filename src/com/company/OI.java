@@ -45,15 +45,25 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     public static final Joystick driver = new Joystick(0);
     public static final Joystick coDriver = new Joystick(1);
+    public static final Joystick dsDriver = new Joystick(2);
+    public static final Joystick dsDriver2 = new Joystick(3);
 
-    public static final Button button11 = new JoystickButton(coDriver,11);
-    public static final Button button12 = new JoystickButton(coDriver, 12);
-    public static final Button button10 = new JoystickButton(coDriver,10);
-    public static final Button button9 = new JoystickButton(coDriver, 9);
-    public static final Button button8 = new JoystickButton(coDriver, 8);
-    public static final Button button7 = new JoystickButton(coDriver,7);
-    public static final Button button2 = new JoystickButton(coDriver, 2);
-    public static final Button button1 = new JoystickButton(coDriver, 1);
+    public static final Button button1 = new JoystickButton(dsDriver, 5);
+    public static final Button button2 = new JoystickButton(dsDriver2, 6);
+    public static final Button button3 = new JoystickButton(dsDriver, 7);
+    public static final Button button4 = new JoystickButton(dsDriver, 6);
+    public static final Button button5 = new JoystickButton(dsDriver, 11);
+    public static final Button button6 = new JoystickButton(dsDriver, 10);
+    public static final Button button7 = new JoystickButton(dsDriver,8);
+    public static final Button button8 = new JoystickButton(dsDriver, 3);
+    public static final Button button9 = new JoystickButton(dsDriver, 9);
+    public static final Button button10 = new JoystickButton(dsDriver,2);
+    public static final Button button11 = new JoystickButton(dsDriver,1);
+    public static final Button button12 = new JoystickButton(coDriver, 1);
+    public static final Button button13 = new JoystickButton(coDriver, 2);
+    public static final Button button14 = new JoystickButton(coDriver, 3);
+    public static final Button button15 = new JoystickButton(coDriver, 4);
+
     public Joystick getJoystick() {
         return driver;
     }
