@@ -28,8 +28,9 @@ public class ElevatorUp extends Command {
      */
     @Override
     protected void execute() {
-    elevator.set(0.85);
+    elevator.set(-0.8);
     }
+
 
 
     /**
@@ -52,7 +53,7 @@ public class ElevatorUp extends Command {
     @Override
     protected boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return true;
+        return false;
     }
 
 
@@ -64,7 +65,7 @@ public class ElevatorUp extends Command {
      */
     @Override
     protected void end() {
-
+    elevator.set(0);
     }
 
 
@@ -84,6 +85,6 @@ public class ElevatorUp extends Command {
      */
     @Override
     protected void interrupted() {
-        super.interrupted();
+        end();
     }
 }

@@ -61,8 +61,10 @@ public class OI {
     public static final Button button11 = new JoystickButton(dsDriver,1);
     public static final Button button12 = new JoystickButton(coDriver, 1);
     public static final Button button13 = new JoystickButton(coDriver, 2);
-    public static final Button button14 = new JoystickButton(coDriver, 3);
-    public static final Button button15 = new JoystickButton(coDriver, 4);
+    public static final Button button14 = new JoystickButton(coDriver, 10);
+    public static final Button button15 = new JoystickButton(coDriver, 12);
+    public static final Button button16 = new JoystickButton(coDriver, 9);
+    public static final Button button17 = new JoystickButton(coDriver, 11);
 
     public Joystick getJoystick() {
         return driver;

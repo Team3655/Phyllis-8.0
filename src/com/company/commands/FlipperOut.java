@@ -3,7 +3,9 @@ package com.company.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static com.company.RobotMap.FlipperDrive;
+import static com.company.RobotMap.flipperLeft;
+
+//import static com.company.RobotMap.FlipperDrive;
 
 public class FlipperOut extends Command {
     public FlipperOut() {
@@ -18,14 +20,17 @@ public class FlipperOut extends Command {
 
     protected void execute() {
 
-            FlipperDrive.FlipperDrive(0.9, 0);
+        flipperLeft.set(1);
+
         }
     protected boolean isFinished () {
-        return (true);
+        return (false);
     }
     protected void end () {
+        flipperLeft.set(0);
     }
 
     protected void interrupted () {
+        end();
     }
 }

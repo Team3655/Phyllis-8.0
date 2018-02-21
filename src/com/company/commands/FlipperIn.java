@@ -3,7 +3,7 @@ package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import static com.company.RobotMap.FlipperDrive;
+import static com.company.RobotMap.flipperLeft;
 
 public class FlipperIn extends Command {
     public FlipperIn() {
@@ -17,14 +17,18 @@ public class FlipperIn extends Command {
     }
 
     protected void execute() {
-        FlipperDrive.FlipperDrive(-0.9, 0);
-    }
-    protected boolean isFinished () {
-        return (true);
-    }
-    protected void end () {
+        flipperLeft.set(-.5);
     }
 
-    protected void interrupted () {
+    protected boolean isFinished() {
+        return (false);
+    }
+
+    protected void end() {
+        flipperLeft.set(0);
+    }
+
+    protected void interrupted() {
+        end();
     }
 }

@@ -29,15 +29,7 @@ public class NotOldMatics extends Command {
      */
     @Override
     protected void execute() {
-        if(p % 2 != 0) {
-            solenoid3.set(true);
-            solenoid4.set(true);
-        } else {
-            solenoid3.set(false);
-            solenoid4.set(false);
-            solenoid5.set(true);
-            solenoid6.set(true);
-        }
+        solenoid1.set(true);
     }
 
 
@@ -62,7 +54,7 @@ public class NotOldMatics extends Command {
     protected boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
         return false;
-    }
+}
 
 
     /**
@@ -74,7 +66,6 @@ public class NotOldMatics extends Command {
     @Override
     protected void end() {
 solenoid1.set(false);
-solenoid2.set(false);
     }
 
 
@@ -94,6 +85,6 @@ solenoid2.set(false);
      */
     @Override
     protected void interrupted() {
-        super.interrupted();
+end();
     }
 }

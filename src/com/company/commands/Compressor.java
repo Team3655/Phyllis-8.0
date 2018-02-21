@@ -28,7 +28,7 @@ public class Compressor extends Command {
      */
     @Override
     protected void execute() {
-    compressor1.stop();
+    compressor1.start();
     }
 
 
@@ -64,7 +64,7 @@ public class Compressor extends Command {
      */
     @Override
     protected void end() {
-
+compressor1.stop();
     }
 
 

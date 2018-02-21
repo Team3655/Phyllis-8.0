@@ -30,8 +30,7 @@ import static com.company.RobotMap.*;
  * project.
  */
 // If you rename or move this class, update the build.properties file in the project root
-public class Robot extends TimedRobot
-{
+public class Robot extends TimedRobot{
     public static int p = 0;
     public static int i = 0;
 
@@ -40,16 +39,29 @@ public class Robot extends TimedRobot
     private Command autonomousCommand;
     SendableChooser autoChooser;
 
+    private RightFlipperOut flipperRightOut = new RightFlipperOut();
+    private FlipperOut flipperOut = new FlipperOut();
+    private FlipperIn flipperIn = new FlipperIn();
+
+    private CubeDiddler cubeDiddler = new CubeDiddler();
+    private NotOldMatics notOldMatics = new NotOldMatics();
+
+    private RightFlipperIn flipperRightIn = new RightFlipperIn();
+
+    private IntakeIn intakeIn = new IntakeIn();
+    private IntakeOut intakeOut = new IntakeOut();
+
     StringBuilder sb = new StringBuilder();
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
-    public void robotInit()
-    {
+    public void robotInit(){
         compressor1.setClosedLoopControl(true);
-        compressor1.stop();
+
+        SmartDashboard.updateValues();
+
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Default auto", new Test());
         autoChooser.addObject("Switch Auto", new SwitchAuto());
@@ -71,36 +83,29 @@ public class Robot extends TimedRobot
         driveLeft1.config_kD(0, 0, 0);
         driveLeft1.config_kF(0,0,0);
 
-        button1.whileHeld(new RightFlipperOut());
-        button2.whileHeld(new RightFlipperIn());
-        button3.whileHeld(new FlipperOut());
-        button4.whileHeld(new FlipperIn());
-        button5.whileHeld(new RightFlipperOut());
-        button6.whileHeld(new RightFlipperIn());
-        button7.toggleWhenPressed(new NotOldMatics());
-        button8.toggleWhenPressed(new CubeDiddler());
-        button9.toggleWhenPressed(new IntakeIn());
-        button10.toggleWhenPressed(new IntakeOut());
+        button1.whileHeld(new IntakeInSlow());
+        button3.whileHeld(flipperOut);
+        button4.whileHeld(flipperIn);
+       // button5.whileHeld(new RightFlipperOut());
+        button5.whileHeld(flipperRightOut);
+        button6.whileHeld(flipperRightIn);
+        button7.toggleWhenPressed(notOldMatics);
+        button8.toggleWhenPressed(cubeDiddler);
+        button9.toggleWhenPressed(intakeIn);
+        button10.toggleWhenPressed(intakeOut);
+        button11.whileHeld(new Compressor());
         button12.whileHeld(new ElevatorUp());
         button13.whileHeld(new ElevatorDown());
         button14.whileHeld(new DiddlerDown());
         button15.whileHeld(new DiddlerUp());
+        button16.whileHeld(new RightDiddlerDown());
+        button17.whileHeld(new RightDiddlerUp());
 
         double value = 1;
 
-        RobotMap.driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
-        RobotMap.driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right1);
-        RobotMap.driveLeft1.setInverted(true);
-        RobotMap.driveLeft2.setInverted(true);
-        RobotMap.driveLeft1.setSafetyEnabled(false);
-        RobotMap.driveLeft2.setSafetyEnabled(false);
-        RobotMap.driveRight1.setSafetyEnabled(false);
-        RobotMap.driveRight2.setSafetyEnabled(false);
-        RobotMap.flipperLeft.setSafetyEnabled(false);
-        RobotMap.flipperRight.setSafetyEnabled(false);
-        RobotMap.elevator.setSafetyEnabled(false);
 
         driveLeft1.setInverted(true);
+        driveLeft2.setInverted(true);
         driveLeft2.set(ControlMode.Follower, RobotMap.Drive_Left1);
         driveRight2.set(ControlMode.Follower, RobotMap.Drive_Right1);
         driveLeft1.setSafetyEnabled(false);
@@ -194,8 +199,12 @@ public class Robot extends TimedRobot
      * This function is called periodically during operator control.
      */
     @Override
+
     public void teleopPeriodic()
     {
+        SmartDashboard.putNumber( "Right", flipperRight.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Left", flipperLeft.getSelectedSensorPosition(0));
+        SmartDashboard.updateValues();
         Scheduler.getInstance().run();
     }
 

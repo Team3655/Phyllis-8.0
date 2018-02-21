@@ -2,7 +2,9 @@ package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import static com.company.RobotMap.FlipperDrive;
+import static com.company.RobotMap.flipperRight;
+
+//import static com.company.RobotMap.FlipperDrive;
 
 public class RightFlipperIn extends Command {
     public RightFlipperIn() {
@@ -17,14 +19,16 @@ public class RightFlipperIn extends Command {
 
     protected void execute() {
 
-        FlipperDrive.FlipperDrive(-0.0, -0.9);
+        flipperRight.set(0.5);
     }
     protected boolean isFinished () {
-        return (true);
+        return(false);
     }
     protected void end () {
+        flipperRight.set(0);
     }
 
     protected void interrupted () {
+        end();
     }
 }

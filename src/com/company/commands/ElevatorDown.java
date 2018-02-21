@@ -3,6 +3,8 @@ package com.company.commands;
 import com.company.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
+import static com.company.RobotMap.elevator;
+
 
 public class ElevatorDown extends Command {
     public ElevatorDown() {
@@ -28,7 +30,7 @@ public class ElevatorDown extends Command {
     @Override
     protected void execute() {
 
-        RobotMap.elevator.set(-0.35);
+        elevator.set(0.1);
 
     }
 
@@ -53,7 +55,7 @@ public class ElevatorDown extends Command {
     @Override
     protected boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return true;
+        return false;
     }
 
 
@@ -65,7 +67,7 @@ public class ElevatorDown extends Command {
      */
     @Override
     protected void end() {
-
+    elevator.set(0);
     }
 
 
@@ -85,6 +87,6 @@ public class ElevatorDown extends Command {
      */
     @Override
     protected void interrupted() {
-        super.interrupted();
+        end();
     }
 }

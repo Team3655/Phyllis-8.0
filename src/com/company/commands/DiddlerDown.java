@@ -1,12 +1,16 @@
 package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
 
 import static com.company.RobotMap.diddlerLeft;
 import static com.company.RobotMap.diddlerRight;
 
 
 public class DiddlerDown extends Command {
+
+    private static double currentLimit = 7;
+
     public DiddlerDown() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -30,8 +34,7 @@ public class DiddlerDown extends Command {
     @Override
     protected void execute() {
 
-        diddlerRight.set(0.85);
-        diddlerLeft.set(-0.85);
+        diddlerLeft.set(-0.6);
 
     }
 
@@ -56,7 +59,7 @@ public class DiddlerDown extends Command {
     @Override
     protected boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
+        return PDPJNI.getPDPChannelCurrent((byte)4,0) > currentLimit;
     }
 
 
@@ -69,7 +72,6 @@ public class DiddlerDown extends Command {
     @Override
     protected void end() {
 
-        diddlerRight.set(0);
         diddlerLeft.set(0);
 
     }
@@ -91,6 +93,6 @@ public class DiddlerDown extends Command {
      */
     @Override
     protected void interrupted() {
-        super.interrupted();
+        end();
     }
 }

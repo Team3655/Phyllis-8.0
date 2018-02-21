@@ -28,8 +28,7 @@ public class CubeDiddler extends Command {
      */
     @Override
     protected void execute() {
-        solenoid1.set(true);
-        solenoid2.set(true);
+    solenoid2.set(true);
     }
 
 
@@ -65,9 +64,7 @@ public class CubeDiddler extends Command {
      */
     @Override
     protected void end() {
-        solenoid1.set(false);
-        solenoid2.set(false);
-
+    solenoid2.set(false);
     }
 
 
@@ -87,6 +84,6 @@ public class CubeDiddler extends Command {
      */
     @Override
     protected void interrupted() {
-        super.interrupted();
+end();
     }
 }

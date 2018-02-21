@@ -1,11 +1,14 @@
 package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+
 import static com.company.RobotMap.intakeRight;
 import static com.company.RobotMap.intakeLeft;
 
 
 public class IntakeOut extends Command {
+
     public IntakeOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -29,8 +32,8 @@ public class IntakeOut extends Command {
     @Override
     protected void execute() {
 
-        intakeRight.set(0.75);
-        intakeLeft.set(-0.75);
+        intakeRight.set(0.6);
+        intakeLeft.set(-0.6 );
 
     }
 
@@ -72,22 +75,7 @@ public class IntakeOut extends Command {
     }
 
 
-    /**
-     * <p>
-     * Called when the command ends because somebody called {@link #cancel()} or
-     * another command shared the same requirements as this one, and booted it out. For example,
-     * it is called when another command which requires one or more of the same
-     * subsystems is scheduled to run.
-     * </p><p>
-     * This is where you may want to wrap up loose ends, like shutting off a motor that was being
-     * used in the command.
-     * </p><p>
-     * Generally, it is useful to simply call the {@link #end()} method within this
-     * method, as done here.
-     * </p>
-     */
-    @Override
     protected void interrupted() {
-        super.interrupted();
+        end();
     }
 }

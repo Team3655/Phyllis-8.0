@@ -30,7 +30,6 @@ public class DiddlerUp extends Command {
     @Override
     protected void execute() {
 
-        diddlerRight.set(-0.5);
         diddlerLeft.set(0.5);
 
     }
@@ -69,7 +68,6 @@ public class DiddlerUp extends Command {
     @Override
     protected void end() {
 
-        diddlerRight.set(0);
         diddlerLeft.set(0);
 
     }
