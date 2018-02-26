@@ -8,8 +8,6 @@
 package com.company;
 
 import com.company.commands.*;
-import com.company.commands.Auto.AutonomousCommand;
-import com.company.commands.Auto.Test;
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -18,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.company.commands.Auto.SwitchAuto;
+
 import static com.company.OI.*;
 import static com.company.RobotMap.*;
 
@@ -63,9 +61,7 @@ public class Robot extends TimedRobot{
         SmartDashboard.updateValues();
 
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Default auto", new Test());
-        autoChooser.addObject("Switch Auto", new SwitchAuto());
-        autoChooser.addObject("AutoCommand", new AutonomousCommand());
+
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
 
         driveRight1.configMotionCruiseVelocity(10, 10);
@@ -212,8 +208,7 @@ public class Robot extends TimedRobot{
      * This function is called periodically during test mode.
      */
     @Override
-    public void testPeriodic()
-    {
+    public void testPeriodic() {
 
     }
 }
