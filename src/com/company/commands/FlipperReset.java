@@ -1,17 +1,13 @@
 package com.company.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
 
-import static com.company.RobotMap.diddlerLeft;
-import static com.company.RobotMap.diddlerRight;
+import static com.company.RobotMap.flipperLeft;
+import static com.company.RobotMap.flipperRight;
 
 
-public class DiddlerDown extends Command {
-
-    private static double currentLimit = 7;
-
-    public DiddlerDown() {
+public class FlipperReset extends Command {
+    public FlipperReset() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -33,10 +29,16 @@ public class DiddlerDown extends Command {
      */
     @Override
     protected void execute() {
-
-        diddlerLeft.set(-0.6);
-        diddlerRight.set(0.6);
-
+    if(flipperRight.getSelectedSensorPosition(0) > 1400){
+        flipperRight.set(-.5);
+    } else {
+        flipperRight.set(.5);
+    }
+    if (flipperLeft.getSelectedSensorPosition(0) > 1400){
+        flipperRight.set(.5);
+    } else {
+        flipperLeft.set(-.5);
+    }
     }
 
 
@@ -59,8 +61,22 @@ public class DiddlerDown extends Command {
      */
     @Override
     protected boolean isFinished() {
+        boolean a = false;
+        boolean b = false;
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return PDPJNI.getPDPChannelCurrent((byte)4,0) > currentLimit;
+        if (flipperLeft.getSelectedSensorPosition(0) >= 1350 && flipperLeft.getSelectedSensorPosition(0) <= 1450) {
+            flipperLeft.set(0);
+            a = true;
+        }
+        if (flipperRight.getSelectedSensorPosition(0) >= 1350 && flipperRight.getSelectedSensorPosition(0) <= 1450){
+            flipperRight.set(0);
+            b = true;
+        }
+        if (a && b){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 
@@ -72,8 +88,6 @@ public class DiddlerDown extends Command {
      */
     @Override
     protected void end() {
-
-        diddlerLeft.set(0);
 
     }
 
@@ -94,6 +108,6 @@ public class DiddlerDown extends Command {
      */
     @Override
     protected void interrupted() {
-        end();
+        super.interrupted();
     }
 }

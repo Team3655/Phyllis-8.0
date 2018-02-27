@@ -40,14 +40,19 @@ public class Robot extends TimedRobot{
     private RightFlipperOut flipperRightOut = new RightFlipperOut();
     private FlipperOut flipperOut = new FlipperOut();
     private FlipperIn flipperIn = new FlipperIn();
-
     private CubeDiddler cubeDiddler = new CubeDiddler();
     private NotOldMatics notOldMatics = new NotOldMatics();
-
     private RightFlipperIn flipperRightIn = new RightFlipperIn();
-
     private IntakeIn intakeIn = new IntakeIn();
     private IntakeOut intakeOut = new IntakeOut();
+    private DiddlerUp diddlerUp = new DiddlerUp();
+    private DiddlerDown diddlerDown = new DiddlerDown();
+    private Compressor compressor = new Compressor();
+    private IntakeInSlow intakeOutSlow = new IntakeInSlow();
+    private ElevatorUp elevatorUp = new ElevatorUp();
+    private ElevatorGroup elevatorGroup = new ElevatorGroup();
+
+
 
     StringBuilder sb = new StringBuilder();
     /**
@@ -79,23 +84,19 @@ public class Robot extends TimedRobot{
         driveLeft1.config_kD(0, 0, 0);
         driveLeft1.config_kF(0,0,0);
 
-        button1.whileHeld(new IntakeInSlow());
+        button1.whileHeld(diddlerUp);
+        button2.whileHeld(diddlerDown);
         button3.whileHeld(flipperOut);
         button4.whileHeld(flipperIn);
-       // button5.whileHeld(new RightFlipperOut());
         button5.whileHeld(flipperRightOut);
         button6.whileHeld(flipperRightIn);
-        button7.toggleWhenPressed(notOldMatics);
+        button7.whileHeld(intakeOutSlow);
         button8.toggleWhenPressed(cubeDiddler);
         button9.toggleWhenPressed(intakeIn);
         button10.toggleWhenPressed(intakeOut);
-        button11.whileHeld(new Compressor());
-        button12.whileHeld(new ElevatorUp());
-        button13.whileHeld(new ElevatorDown());
-        button14.whileHeld(new DiddlerDown());
-        button15.whileHeld(new DiddlerUp());
-        button16.whileHeld(new RightDiddlerDown());
-        button17.whileHeld(new RightDiddlerUp());
+        button11.whileHeld(compressor);
+        button12.whileHeld(notOldMatics);
+        button13.toggleWhenPressed(elevatorUp);
 
         double value = 1;
 
@@ -174,6 +175,11 @@ public class Robot extends TimedRobot{
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Drive Left", driveLeft1.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Drive Right", driveRight1.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Flipper Left", flipperLeft.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Flipper Right", flipperRight.getSelectedSensorPosition(0));
+
     }
 
     @Override

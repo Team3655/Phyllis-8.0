@@ -28,9 +28,8 @@ public class ElevatorUp extends Command {
      */
     @Override
     protected void execute() {
-    elevator.set(-0.8);
+    elevator.set(-0.8 * coDriver.getX());
     }
-
 
 
     /**

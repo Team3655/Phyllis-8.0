@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_phyllis-8.0" default="compile.module.phyllis-8.0">
+  <dirname property="module.phyllis-8.0.basedir" file="${ant.file.module_phyllis-8.0}"/>
+  
+  <property name="module.jdk.home.phyllis-8.0" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.phyllis-8.0" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.phyllis-8.0" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.phyllis-8.0" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="phyllis-8.0.output.dir" value="${module.phyllis-8.0.basedir}/out/production/Phyllis-8.0"/>
+  <property name="phyllis-8.0.testoutput.dir" value="${module.phyllis-8.0.basedir}/out/test/Phyllis-8.0"/>
+  
+  <path id="phyllis-8.0.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="phyllis-8.0.module.production.classpath">
+    <path refid="${module.jdk.classpath.phyllis-8.0}"/>
+    <fileset dir="${basedir}/../../../wpilib/java/current/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/../../../wpilib/user/java/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="phyllis-8.0.runtime.production.module.classpath">
+    <pathelement location="${phyllis-8.0.output.dir}"/>
+    <fileset dir="${basedir}/../../../wpilib/java/current/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/../../../wpilib/user/java/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="phyllis-8.0.module.classpath">
+    <path refid="${module.jdk.classpath.phyllis-8.0}"/>
+    <pathelement location="${phyllis-8.0.output.dir}"/>
+    <fileset dir="${basedir}/../../../wpilib/java/current/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/../../../wpilib/user/java/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="phyllis-8.0.runtime.module.classpath">
+    <pathelement location="${phyllis-8.0.testoutput.dir}"/>
+    <pathelement location="${phyllis-8.0.output.dir}"/>
+    <fileset dir="${basedir}/../../../wpilib/java/current/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/../../../wpilib/user/java/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.phyllis-8.0">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.phyllis-8.0">
+    <patternset refid="excluded.from.module.phyllis-8.0"/>
+  </patternset>
+  
+  <path id="phyllis-8.0.module.sourcepath">
+    <dirset dir="${module.phyllis-8.0.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.phyllis-8.0" depends="compile.module.phyllis-8.0.production,compile.module.phyllis-8.0.tests" description="Compile module Phyllis-8.0"/>
+  
+  <target name="compile.module.phyllis-8.0.production" depends="register.custom.compilers" description="Compile module Phyllis-8.0; production classes">
+    <mkdir dir="${phyllis-8.0.output.dir}"/>
+    <javac2 destdir="${phyllis-8.0.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.phyllis-8.0}/javac">
+      <compilerarg line="${compiler.args.phyllis-8.0}"/>
+      <bootclasspath refid="phyllis-8.0.module.bootclasspath"/>
+      <classpath refid="phyllis-8.0.module.production.classpath"/>
+      <src refid="phyllis-8.0.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.phyllis-8.0"/>
+    </javac2>
+    
+    <copy todir="${phyllis-8.0.output.dir}">
+      <fileset dir="${module.phyllis-8.0.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.phyllis-8.0.tests" depends="register.custom.compilers,compile.module.phyllis-8.0.production" description="compile module Phyllis-8.0; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.phyllis-8.0" description="cleanup module">
+    <delete dir="${phyllis-8.0.output.dir}"/>
+    <delete dir="${phyllis-8.0.testoutput.dir}"/>
+  </target>
+</project>
